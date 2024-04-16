@@ -10,16 +10,22 @@ import threading
 class SizeReport:
   
     def __init__(self, path:str):
+        self.rldate = 'August 11, 2023'
+        self.vrsn = '0.2.0'
+        self.date = 'April 16, 2024'
+        
+        self.version()
+        
+        
         self.path = path
         self.contentdetails = self.compute(self.path)
         self.df = pd.DataFrame(self.contentdetails)
-        self.vrsn = '0.1.1'
-        self.date = 'August 11, 2023'
+        
     
     def version(self):
-        print('Size Report Analyser')
-        print("Version: {self.vrsn}")
-        print("Released on: {self.date}")
+        print('\nSize Report Analyser')
+        print(f"Version: {self.vrsn}")
+        print(f"Released on: {self.date}")
     
     def __print(self, line):
         print('\r' + ' '*self.__n, end='\r')
@@ -109,9 +115,9 @@ class SizeReport:
             details['Size (in B)'] = size
             details['Size'] = self.compactsize(size)
             
-            contentdetails.append(details)
-            
             self.__print(f"Appending {details['Name']} ...")
+            
+            contentdetails.append(details)            
         
         self.__print("Scanning completed!!\n\n")
         cursor.show()
